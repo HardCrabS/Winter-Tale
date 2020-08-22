@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c020ddceb8138d2409f5e0dbb36de44a, type: 3}
+  m_Name: Area Effect
+  m_EditorClassIdentifier: 
+  energyCost: 30
+  particle: {fileID: 4472703561876143206, guid: f91be20f020dcd843a51ba4c6c475429,
+    type: 3}
+  animClip: {fileID: -5758404819369510731, guid: 7f4b35943419c3e45abdf6c6ed3ad510,
+    type: 3}
+  audioClips:
+  - {fileID: 8300000, guid: 5a5d6771f967cf6499a40a4ccaeae00b, type: 3}
+  - {fileID: 8300000, guid: f11f6f2e8b8b328418fdceb6e6c2cfb9, type: 3}
+  radius: 5
+  damageToEachTarget: 15

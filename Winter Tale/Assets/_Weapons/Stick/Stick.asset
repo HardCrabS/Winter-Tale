@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c498ce5f140a72468817063854e1ef9, type: 3}
+  m_Name: Stick
+  m_EditorClassIdentifier: 
+  weaponGrip: {fileID: 6207745515902014348, guid: 82412f569e8ef2b46b0aa00df1fed824,
+    type: 3}
+  weaponPrefab: {fileID: 8626933157943817420, guid: b6e5f8746bf53c04c84775ffe622bfd9,
+    type: 3}
+  attackAnimation: {fileID: -2629900064670850725, guid: 87caca6e0c9033d428dc4a001b780fea,
+    type: 3}
+  timeBetweenAnimations: 0.5
+  maxAttackRange: 1.7
+  additionalDamage: 10
+  damageDelay: 0.3

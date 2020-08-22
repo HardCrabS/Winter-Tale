@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Snowman Override
+  m_Controller: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 4fbe08e289d0d5041a9b4d1ab0f61261, type: 2}
+    m_OverrideClip: {fileID: -2629900064670850725, guid: 87caca6e0c9033d428dc4a001b780fea,
+      type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 651d553b4d043ea4da4acc726384732e, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: d01bc7c7263ec8d4aa3f7947c2ddf0cb, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 743b2f433ce9dc34fa40bbc53b94319f, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 743b2f433ce9dc34fa40bbc53b94319f, type: 3}
+  - m_OriginalClip: {fileID: -982115091633673366, guid: 87caca6e0c9033d428dc4a001b780fea,
+      type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 72a282e951d41784d8eb00ff127a1efb, type: 2}
