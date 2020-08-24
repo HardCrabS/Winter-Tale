@@ -10,6 +10,7 @@ public class MusicPlaylist : MonoBehaviour
     [SerializeField] AudioClip bossFightMusic;
     [SerializeField] AudioClip afterBossMusic;
 
+    int[] randomSongsIndex;
     int currTrackIndex = 0;
     AudioSource audioSource;
 
@@ -21,7 +22,7 @@ public class MusicPlaylist : MonoBehaviour
 
     void Start()
     {
-
+        Randomize(audioClips);
     }
 
     // Update is called once per frame
@@ -32,8 +33,6 @@ public class MusicPlaylist : MonoBehaviour
             currTrackIndex = (currTrackIndex + 1) % audioClips.Length;
             audioSource.clip = audioClips[currTrackIndex];
             audioSource.Play();
-            GameData.Instance.saveData.currSongIndex = currTrackIndex;
-            GameData.Instance.Save();
         }
     }
     public IEnumerator FadeOutAtBossFight(float fadeTime)
@@ -66,16 +65,23 @@ public class MusicPlaylist : MonoBehaviour
         audioSource.volume = startVolume;
     }
 
-    public int GetCurrentSongIndex()
-    {
-        return currTrackIndex;
-    }
-
     public void PlaySongWithIndex(int index)
     {
         currTrackIndex = index;
         audioSource.Stop();
         audioSource.clip = audioClips[currTrackIndex];
         audioSource.Play();
+    }
+    public static void Randomize<T>(T[] items)
+    {
+        // For each spot in the array, pick
+        // a random item to swap into that spot.
+        for (int i = 0; i < items.Length - 1; i++)
+        {
+            int j = Random.Range(i, items.Length);
+            T temp = items[i];
+            items[i] = items[j];
+            items[j] = temp;
+        }
     }
 }

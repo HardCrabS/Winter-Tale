@@ -22,12 +22,15 @@ public struct Position
 public class SaveData
 {
     public Position spawnPoint;
-    public int currSongIndex;
+
+    public bool isDirectMovement;
+    public float volume = 0.7f;
 }
 
 public class GameData : MonoBehaviour
 {
     [SerializeField] PlayerControl player;
+    [SerializeField] GameObject startCutscene;
 
     public static GameData Instance;
 
@@ -38,17 +41,26 @@ public class GameData : MonoBehaviour
         Instance = this;
 
         Load();
-        if (saveData.spawnPoint.x != 0 && saveData.spawnPoint.y != 0)
+        if (player != null)
         {
-            player.gameObject.SetActive(false);
-            SetPlayer();
-            player.gameObject.SetActive(true);
+            player.GetComponent<PlayerControl>().SetMovementType(saveData.isDirectMovement);
+            if (saveData.spawnPoint.x != 0 && saveData.spawnPoint.y != 0)
+            {
+                player.gameObject.SetActive(false);
+                SetPlayer();
+                player.gameObject.SetActive(true);
+            }
+            else
+            {
+                if (startCutscene != null)
+                    startCutscene.SetActive(true);
+            }
         }
     }
 
     private void Start()
     {
-        MusicPlaylist.Instance.PlaySongWithIndex(saveData.currSongIndex);
+        Time.timeScale = 1;
     }
 
     public void Save()
@@ -80,16 +92,22 @@ public class GameData : MonoBehaviour
     void SetPlayer()
     {
         var pos = new Vector3(saveData.spawnPoint.x, saveData.spawnPoint.y, saveData.spawnPoint.z);
-        print(pos);
         player.transform.position = pos;
     }
 
+    public void SetMovementType(bool movementType)
+    {
+        saveData.isDirectMovement = movementType;
+        Save();
+    }
     public void EraseGameData()
     {
         string path = Application.persistentDataPath + "/GameData.data";
         if (File.Exists(path))
         {
-            File.Delete(path);
+            saveData.spawnPoint.x = 0;
+            saveData.spawnPoint.y = 0;
+            Save();
         }
     }
 }

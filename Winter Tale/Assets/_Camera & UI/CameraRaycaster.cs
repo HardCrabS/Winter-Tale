@@ -84,7 +84,7 @@ namespace RPG.CameraUI
             if (potentiallyWalkableHit)
             {
                 Cursor.SetCursor(walkCursor, cursorHotSpot, CursorMode.Auto);
-                onMouseOverTerrain(raycastHit.point);
+                onMouseOverTerrain?.Invoke(raycastHit.point);
                 return true;
             }
             return false;

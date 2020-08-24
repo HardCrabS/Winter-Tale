@@ -6,12 +6,15 @@ namespace RPG.Characters
 {
     public class PlayerControl : MonoBehaviour
     {
+        [SerializeField] bool isInDirectMovement = false;
         [SerializeField] GameObject deathButtons;
 
         SpecialAbilities abilities;
         HealthSystem healthSystem;
         WeaponSystem weaponSystem;
         Character character;
+
+        bool paused = false;
 
         void Start()
         {
@@ -28,11 +31,34 @@ namespace RPG.Characters
             CameraRaycaster cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
             cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
             cameraRaycaster.onMouseOverDestroyable += OnMouseOverDestroyable;
-            cameraRaycaster.onMouseOverTerrain += OnMouseOverPotWalkable;
+            if (!isInDirectMovement)
+            {
+                cameraRaycaster.onMouseOverTerrain += OnMouseOverPotWalkable;
+            }
         }
 
         void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (!paused)
+                {
+                    paused = true;
+                    Time.timeScale = 0;
+                    deathButtons.SetActive(true);
+                }
+                else
+                {
+                    paused = false;
+                    Time.timeScale = 1;
+                    deathButtons.SetActive(false);
+                }
+            }
+
+            if(isInDirectMovement)
+            {
+                character.ProcessDirectMovement();
+            }
             if(healthSystem.healthAsPercentage > Mathf.Epsilon)
             {
                 ScanForAbilityKeyDown();
@@ -48,7 +74,7 @@ namespace RPG.Characters
         {
             for (int keyIndex = 1; keyIndex < abilities.GetNumberOfAbilities(); keyIndex++)
             {
-                if (Input.GetKeyDown(keyIndex.ToString()))
+                if (Input.GetKeyDown("[" + keyIndex + "]"))
                 {
                     abilities.AttemptSpecialAbility(keyIndex);
                 }
@@ -125,6 +151,11 @@ namespace RPG.Characters
             {
                 return false;
             }
+        }
+
+        public void SetMovementType(bool movementType)
+        {
+            isInDirectMovement = movementType;
         }
     }
 }

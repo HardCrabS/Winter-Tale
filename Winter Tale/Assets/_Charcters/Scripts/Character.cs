@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 using RPG.CameraUI;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace RPG.Characters
 {
@@ -28,14 +30,14 @@ namespace RPG.Characters
         [Header("Movement Properties")]
         [SerializeField] float stoppingDistance = 1;
         [SerializeField] float moveSpeedMultiplier = 0.7f;
-        [SerializeField] float animationSpeed = 1; 
+        [SerializeField] float animationSpeed = 1;
         [SerializeField] float movingTurnSpeed = 360;
         [SerializeField] float stationaryTurnSpeed = 180;
         [Range(0, 1)] [SerializeField] float animatorForwardCap = 1;
 
         float turnAmount;
         float forwardAmount;
-        bool isAlive = true; 
+        bool isAlive = true;
 
         NavMeshAgent agent;
         Animator animator;
@@ -85,7 +87,7 @@ namespace RPG.Characters
 
         protected void Update()
         {
-            if(agent.remainingDistance > stoppingDistance && isAlive)
+            if (agent.remainingDistance > stoppingDistance && isAlive)
             {
                 Move(agent.desiredVelocity);
             }
@@ -97,7 +99,7 @@ namespace RPG.Characters
 
         protected void OnAnimatorMove()
         {
-            if(Time.deltaTime > 0)
+            if (Time.deltaTime > 0)
             {
                 Vector3 velocity = (animator.deltaPosition * moveSpeedMultiplier) / Time.deltaTime;
 
@@ -149,7 +151,7 @@ namespace RPG.Characters
         }
 
         //Isnt using it for now
-        void ProcessDirectMovement()
+        public void ProcessDirectMovement()
         {
             float h = Input.GetAxis("Horizontal");
             float v = Input.GetAxis("Vertical");
@@ -157,7 +159,8 @@ namespace RPG.Characters
             Vector3 m_CamForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
             Vector3 m_Move = v * m_CamForward + h * Camera.main.transform.right;
 
-            Move(m_Move);
+            //Move(m_Move * agentSpeed * moveSpeedMultiplier);
+            SetDestination(transform.position + m_Move * 3);
         }
     }
 }

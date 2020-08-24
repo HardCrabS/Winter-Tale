@@ -30,6 +30,7 @@ public class ExitDoorTrigger : MonoBehaviour
             creditsCanvas.SetActive(true);
             gameCanvas.SetActive(false);
             campfireFire.SetActive(true);
+            Destroy(other.gameObject);
             StartCoroutine(CheckForInput());
         }
     }

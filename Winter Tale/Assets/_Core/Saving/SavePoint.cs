@@ -21,10 +21,8 @@ public class SavePoint : MonoBehaviour
         var player = other.GetComponent<PlayerControl>();
         if (player)
         {
-            SaveData saveData = new SaveData();
-
-            saveData.spawnPoint = new Position(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z);
-            GameData.Instance.saveData = saveData;
+            GameData.Instance.saveData.spawnPoint 
+                = new Position(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z);
             GameData.Instance.Save();
 
             PlayEffects();
