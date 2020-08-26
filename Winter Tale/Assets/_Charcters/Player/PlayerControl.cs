@@ -14,8 +14,6 @@ namespace RPG.Characters
         WeaponSystem weaponSystem;
         Character character;
 
-        bool paused = false;
-
         void Start()
         {
             abilities = GetComponent<SpecialAbilities>();
@@ -31,30 +29,14 @@ namespace RPG.Characters
             CameraRaycaster cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
             cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
             cameraRaycaster.onMouseOverDestroyable += OnMouseOverDestroyable;
-            if (!isInDirectMovement)
+            /*if (!isInDirectMovement)
             {
                 cameraRaycaster.onMouseOverTerrain += OnMouseOverPotWalkable;
-            }
+            }*/
         }
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (!paused)
-                {
-                    paused = true;
-                    Time.timeScale = 0;
-                    deathButtons.SetActive(true);
-                }
-                else
-                {
-                    paused = false;
-                    Time.timeScale = 1;
-                    deathButtons.SetActive(false);
-                }
-            }
-
             if(isInDirectMovement)
             {
                 character.ProcessDirectMovement();
@@ -65,6 +47,9 @@ namespace RPG.Characters
             }
             else
             {
+                //disabling resume button 
+                deathButtons.transform.GetChild(0).GetComponent<UnityEngine.UI.Button>().interactable = false;
+
                 deathButtons.SetActive(true);
                 Destroy(this);
             }
@@ -72,11 +57,11 @@ namespace RPG.Characters
 
         private void ScanForAbilityKeyDown()
         {
-            for (int keyIndex = 1; keyIndex < abilities.GetNumberOfAbilities(); keyIndex++)
+            for (int i = 0; i < abilities.GetNumberOfAbilities(); i++)
             {
-                if (Input.GetKeyDown("[" + keyIndex + "]"))
+                if (abilities.abilities[i] && Input.GetKeyDown(abilities.abilities[i].ButtonName))
                 {
-                    abilities.AttemptSpecialAbility(keyIndex);
+                    abilities.AttemptSpecialAbility(i);
                 }
             }
         }
@@ -156,6 +141,15 @@ namespace RPG.Characters
         public void SetMovementType(bool movementType)
         {
             isInDirectMovement = movementType;
+            CameraRaycaster cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
+            if (!isInDirectMovement)
+            {
+                cameraRaycaster.onMouseOverTerrain += OnMouseOverPotWalkable;
+            }
+            else if(cameraRaycaster.OnTerrainHasSubs())
+            {
+                cameraRaycaster.onMouseOverTerrain -= OnMouseOverPotWalkable;
+            }
         }
     }
 }

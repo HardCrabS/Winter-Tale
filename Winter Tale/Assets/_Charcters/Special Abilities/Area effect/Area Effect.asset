@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c020ddceb8138d2409f5e0dbb36de44a, type: 3}
   m_Name: Area Effect
   m_EditorClassIdentifier: 
+  buttonName: e
   energyCost: 30
   particle: {fileID: 4472703561876143206, guid: f91be20f020dcd843a51ba4c6c475429,
     type: 3}

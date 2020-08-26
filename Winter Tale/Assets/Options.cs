@@ -5,28 +5,54 @@ using UnityEngine.UI;
 
 public class Options : MonoBehaviour
 {
+    [SerializeField] GameObject pausePanel;
+    [SerializeField] GameObject optionsPanel;
     [SerializeField] GameObject checkmark1, checkmark2;
     [SerializeField] Slider volumeSlider;
     [SerializeField] AudioSource audioSource;
 
+    bool paused = false;
+
     private void Start()
     {
-        if (checkmark1 != null)
+        if (GameData.Instance.saveData.isDirectMovement)
         {
-            if (GameData.Instance.saveData.isDirectMovement)
+            checkmark1.SetActive(true);
+            checkmark2.SetActive(false);
+        }
+        else
+        {
+            checkmark1.SetActive(false);
+            checkmark2.SetActive(true);
+        }
+        volumeSlider.value = GameData.Instance.saveData.volume;
+        volumeSlider.onValueChanged.AddListener(delegate { SetVolume(); });
+
+        audioSource.volume = GameData.Instance.saveData.volume;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!paused)
             {
-                checkmark1.SetActive(true);
-                checkmark2.SetActive(false);
+                paused = true;
+                Time.timeScale = 0;
+                optionsPanel.SetActive(false);
+                pausePanel.SetActive(true);
             }
             else
             {
-                checkmark1.SetActive(false);
-                checkmark2.SetActive(true);
+                ResumeGame();
             }
-            volumeSlider.value = GameData.Instance.saveData.volume;
-            volumeSlider.onValueChanged.AddListener(delegate { SetVolume(); });
         }
-        audioSource.volume = GameData.Instance.saveData.volume;
+    }
+    public void ResumeGame()
+    {
+        paused = false;
+        Time.timeScale = 1;
+        pausePanel.SetActive(false);
     }
     public void SetVolume()
     {

@@ -7,6 +7,7 @@ namespace RPG.Characters
     public abstract class AbilityConfig : ScriptableObject
     {
         [Header("Special Ability General")]
+        [SerializeField] string buttonName;
         [SerializeField] float energyCost = 10;
         [SerializeField] GameObject particle;
         [SerializeField] AnimationClip animClip;
@@ -25,7 +26,8 @@ namespace RPG.Characters
         {
             behaviour.Use(target);
         }
-
+        
+        public string ButtonName { get { return buttonName; } }
         public float EnergyCost { get { return energyCost; } }
         public AnimationClip AbilityAnimation { get { return animClip; } }
         public GameObject Particle { get { return particle; } }

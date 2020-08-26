@@ -89,5 +89,10 @@ namespace RPG.CameraUI
             }
             return false;
         }
+
+        public bool OnTerrainHasSubs()
+        {
+            return onMouseOverTerrain != null;
+        }
     }
 }

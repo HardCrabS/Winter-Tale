@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368e7e684f7935842a883b8f88df86ae, type: 3}
   m_Name: Power Attack
   m_EditorClassIdentifier: 
+  buttonName: 0
   energyCost: 25
   particle: {fileID: 0}
   animClip: {fileID: 7400000, guid: 84737158b8acdfd46a09c0013aadaca7, type: 3}

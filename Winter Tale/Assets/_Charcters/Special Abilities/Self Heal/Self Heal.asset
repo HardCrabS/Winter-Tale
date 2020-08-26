@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff4298872aa902e488efd318d4fd2eb5, type: 3}
   m_Name: Self Heal
   m_EditorClassIdentifier: 
+  buttonName: q
   energyCost: 50
   particle: {fileID: 1835367814401270085, guid: a109c9ffe5acd664db906bd70864ac6c,
     type: 3}

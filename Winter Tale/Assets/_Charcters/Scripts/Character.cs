@@ -150,7 +150,6 @@ namespace RPG.Characters
             isAlive = false;
         }
 
-        //Isnt using it for now
         public void ProcessDirectMovement()
         {
             float h = Input.GetAxis("Horizontal");

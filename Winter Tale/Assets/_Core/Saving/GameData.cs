@@ -97,6 +97,10 @@ public class GameData : MonoBehaviour
 
     public void SetMovementType(bool movementType)
     {
+        if(player != null)
+        {
+            player.SetMovementType(movementType);
+        }
         saveData.isDirectMovement = movementType;
         Save();
     }
